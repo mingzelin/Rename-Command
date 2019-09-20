@@ -1,0 +1,39 @@
+java rename -replace 123 @timexx@time@date -file f123  => f@timexx@time@date
+
+java rename -prefix X@time@date -file f =>X@time@datef
+
+//no file exist
+java rename -prefix a -file f*   Error: filename: f* does not exists
+
+
+java rename -prefix @time a -file f =>04-53-05af
+
+java rename -prefix @timea -file f =>@timeaf
+
+//a exist b doesn't
+java rename -replace a b -file a b  Error: filename: b does not exists
+
+java rename -replace file @date -file fileA     ->   09-11-2019A
+
+java rename -prefix a -suffix a -prefix a -file f1 => aaf1a
+
+java rename -prefix a -suffix a  -file f1 -prefix a =>aaf1a
+
+java rename -prefix y y -b -file file1
+Error: invalid option or misplaced dash in arguments!@2
+
+rename -prefix a -help file1 —> HELP INFO (file1 unchanged)
+
+rename -prefix a -replace file1 b -file file1 —> ab
+
+java rename -prefix a -prefix b -prefix c -suffix a b c -suffix efg h i g k -file x => cbaxabcefghigk
+
+java rename -prefix abcdef -suffix abc d e f -prefix a -suffix f -replace aa xx -replace ff yy -file x y z
+=>xxbcdefxabcdeyy  xxbcdefyabcdeyy  xxbcdefzabcdeyy
+
+java rename -prefix abcdef -suffix abc d e f -prefix a -suffix f -replace aa xx -replace xa yy -file x y z
+Error: replacement string not found in filenames
+
+
+java rename -prefix @time @date AA -suffix xx @time @date @time@date -replace xx @time -file x
+=> 12-04-2909-13-2019AA12-04-29x12-04-2909-13-2019@time@date
